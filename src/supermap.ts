@@ -212,6 +212,17 @@ export class Supermap<K, V> extends Map<K, V> {
             for (const [key, val] of map) newMap.set(key, val)
         return newMap
     }
+
+    public equals(map: Supermap<K, V>): boolean {
+        if (this === map) return true
+        if (this.size !== map.size) return false
+        for (const [key, value] of this) {
+            if (!map.has(key) || value !== map.get(key)) {
+                return false
+            }
+        }
+        return true
+    }
 }
 
 function randomOfArray<T>(array: T[]): T {
