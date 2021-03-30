@@ -27,7 +27,7 @@ jobs:
           deno-version: ${{ matrix.deno }}
 
       - name: Run unit tests
-        run: make test
+        run: make test-coverage
 
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
