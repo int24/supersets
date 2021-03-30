@@ -114,30 +114,34 @@ export class Supermap<K, V> extends Map<K, V> {
         return Array.from({ length: amount }, () => randomOfArray(array))
     }
 
-    public find(fn: (value: V, key: K, c: this) => boolean): V | undefined {
+    public find(fn: (value: V, key: K, map: this) => boolean): V | undefined {
         for (const [key, val] of this) if (fn(val, key, this)) return val
         return undefined
     }
 
-    public findKey(fn: (value: V, key: K, c: this) => boolean): K | undefined {
+    public findKey(
+        fn: (value: V, key: K, map: this) => boolean
+    ): K | undefined {
         for (const [key, val] of this) if (fn(val, key, this)) return key
         return undefined
     }
 
-    public sweep(fn: (value: V, key: K, c: this) => boolean): number {
+    public sweep(fn: (value: V, key: K, map: this) => boolean): number {
         const sizeBefore = this.size
         for (const [key, val] of this) if (fn(val, key, this)) this.delete(key)
         return sizeBefore - this.size
     }
 
-    public filter(fn: (value: V, key: K, c: this) => boolean): this {
+    public filter(fn: (value: V, key: K, map: this) => boolean): this {
         const results = new Supermap<K, V>() as this
         for (const [key, val] of this)
             if (fn(val, key, this)) results.set(key, val)
         return results
     }
 
-    public partition(fn: (value: V, key: K, c: this) => boolean): [this, this] {
+    public partition(
+        fn: (value: V, key: K, map: this) => boolean
+    ): [this, this] {
         const part1 = new Supermap<K, V>() as this
         const part2 = new Supermap<K, V>() as this
         for (const [key, val] of this) {
@@ -147,24 +151,24 @@ export class Supermap<K, V> extends Map<K, V> {
         return [part1, part2]
     }
 
-    public map<T>(fn: (value: V, key: K, c: this) => T): Supermap<K, T> {
+    public map<T>(fn: (value: V, key: K, map: this) => T): Supermap<K, T> {
         const map = new Supermap() as Supermap<K, T>
         for (const [key, val] of this) map.set(key, fn(val, key, this))
         return map
     }
 
-    public some(fn: (value: V, key: K, c: this) => boolean): boolean {
+    public some(fn: (value: V, key: K, map: this) => boolean): boolean {
         for (const [key, val] of this) if (fn(val, key, this)) return true
         return false
     }
 
-    public every(fn: (value: V, key: K, c: this) => boolean): boolean {
+    public every(fn: (value: V, key: K, map: this) => boolean): boolean {
         for (const [key, val] of this) if (!fn(val, key, this)) return false
         return true
     }
 
     public reduce<T>(
-        fn: (accumulator: T, value: V, key: K, c: this) => T,
+        fn: (accumulator: T, value: V, key: K, map: this) => T,
         initial: T
     ): T {
         let result = initial
@@ -172,16 +176,16 @@ export class Supermap<K, V> extends Map<K, V> {
         return result
     }
 
-    public each(fn: (value: V, key: K, c: this) => void): this {
+    public each(fn: (value: V, key: K, map: this) => void): this {
         super.forEach(fn as (value: V, key: K, map: Map<K, V>) => void)
         return this
     }
 
-    public forEach(fn: (value: V, key: K, c: this) => void): this {
+    public forEach(fn: (value: V, key: K, map: this) => void): this {
         return this.each(fn)
     }
 
-    public tap(fn: (c: this) => void): this {
+    public tap(fn: (map: this) => void): this {
         fn(this)
         return this
     }
