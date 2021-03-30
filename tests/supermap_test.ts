@@ -236,6 +236,7 @@ Deno.test('supermap: compare with equals', () => {
     map2.set('b', 2)
     map2.set('c', 3)
     map3.set('a', 1)
+    map3.set('d', 2)
     assertEquals(map1.equals(map1), true)
     assertEquals(map1.equals(map2), true)
     assertEquals(map1.equals(map3), false)
