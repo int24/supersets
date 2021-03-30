@@ -180,14 +180,17 @@ Deno.test('supermap: reduce items', () => {
     assertStrictEquals(total, 1 + 2 + 3)
 })
 
-Deno.test('supermap: loop with each', () => {
+Deno.test('supermap: loop with each/forEach', () => {
     const map: TestSupermap = new Supermap()
     map.set('a', 1)
     map.set('b', 2)
     map.set('c', 3)
-    let total = 0
-    map.each(x => (total += x))
-    assertStrictEquals(total, 1 + 2 + 3)
+    let total1 = 0
+    let total2 = 0
+    map.each(x => (total1 += x))
+    map.forEach(x => (total2 += x))
+    assertStrictEquals(total1, 1 + 2 + 3)
+    assertStrictEquals(total2, 1 + 2 + 3)
 })
 
 Deno.test('supermap: sort items', () => {
