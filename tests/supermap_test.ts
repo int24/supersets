@@ -235,3 +235,13 @@ Deno.test('supermap: compare with equals', () => {
     assertEquals(map1.equals(map2), true)
     assertEquals(map1.equals(map3), false)
 })
+
+Deno.test('supermap: tap', () => {
+    const map: TestSupermap = new Supermap()
+    map.set('a', 1)
+    map.set('b', 2)
+    map.set('c', 3)
+    let total = 0
+    map.tap(m => (total = m.size))
+    assertStrictEquals(total, map.size)
+})
