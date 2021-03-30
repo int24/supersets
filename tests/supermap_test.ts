@@ -187,3 +187,14 @@ Deno.test('supermap: loop with each', () => {
     map.each(x => (total += x))
     assertStrictEquals(total, 1 + 2 + 3)
 })
+
+Deno.test('supermap: sort items', () => {
+    const map: TestSupermap = new Supermap()
+    map.set('a', 1)
+    map.set('b', 2)
+    map.set('c', 3)
+    const sorted = map.sort((a, b) => b - a)
+    assertStrictEquals(sorted === map, true)
+    equal(sorted, [3, 2, 1])
+    equal(map, [3, 2, 1])
+})

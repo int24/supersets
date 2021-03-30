@@ -35,6 +35,8 @@ export class Supermap<K, V> extends Map<K, V> {
     }
 
     public clear(): void {
+        this._array = null
+        this._keyArray = null
         return super.clear()
     }
 
@@ -175,6 +177,23 @@ export class Supermap<K, V> extends Map<K, V> {
 
     public forEach(fn: (value: V, key: K, c: this) => void): this {
         return this.each(fn)
+    }
+
+    public tap(fn: (c: this) => void): this {
+        fn(this)
+        return this
+    }
+
+    public sort(
+        fn: (firstValue: V, secondValue: V, firstKey: K, secondKey: K) => number
+    ): this {
+        const entries = [...this.entries()]
+        const sorted = entries.sort((a, b): number =>
+            fn(a[1], b[1], a[0], b[0])
+        )
+        this.clear()
+        for (const [k, v] of sorted) this.set(k, v)
+        return this
     }
 }
 
