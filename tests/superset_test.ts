@@ -205,7 +205,7 @@ Deno.test('superset: compare with equals', () => {
     set2.add(2)
     set2.add(3)
     set3.add(3)
-    set3.add(2)
+    set3.add(4)
     set3.add(1)
     set4.add(1)
     set4.add(3)
