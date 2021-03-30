@@ -1,0 +1,30 @@
+name: Deno CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        deno:
+          - v1.8.x
+          - nightly
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: "Use Deno ${{ matrix.deno }}"
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: ${{ matrix.deno }}
+
+      - name: Run unit tests
+        run: make test
