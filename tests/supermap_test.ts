@@ -1,7 +1,8 @@
 import {
     equal,
     assertEquals,
-    assertStrictEquals
+    assertStrictEquals,
+    assertArrayIncludes
 } from 'https://deno.land/std@0.91.0/testing/asserts.ts'
 
 import { Supermap } from '../mod.ts'
@@ -68,4 +69,20 @@ Deno.test('supermap: get first/last values', () => {
     assertEquals(map.lastKey(-1), 'a')
     equal(map.lastKey(3), ['a', 'b', 'c'])
     equal(map.lastKey(-3), ['a', 'b', 'c'])
+})
+
+Deno.test('supermap: get random keys/values', () => {
+    const map = new Supermap()
+    const chars = 'abcdefghij'
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    for (let i = 0; i < chars.length; i++) map.set(chars[i], numbers[i])
+    assertArrayIncludes(numbers, [map.random()])
+    assertArrayIncludes(numbers, map.random(5))
+    assertArrayIncludes(chars, map.randomKey(5))
+    assertArrayIncludes(chars, [map.randomKey()])
+    map.clear()
+    assertStrictEquals(map.random(), undefined)
+    assertStrictEquals(map.randomKey(), undefined)
+    equal(map.random(5), [])
+    equal(map.randomKey(5), [])
 })

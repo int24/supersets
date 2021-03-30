@@ -85,4 +85,32 @@ export class Supermap<K, V> extends Map<K, V> {
         if (amount === 1) return array[array.length - 1]
         return array.slice(-amount)
     }
+
+    public random(): V
+    public random(amount: number): V[]
+    public random(amount?: number): V | V[] | undefined {
+        const array = this.array()
+        if (array.length === 0)
+            return typeof amount !== 'undefined' ? [] : undefined
+        if (typeof amount === 'undefined') return randomOfArray(array)
+        if (amount < 0) return []
+        if (amount === 1) return randomOfArray(array)
+        return Array.from({ length: amount }, () => randomOfArray(array))
+    }
+
+    public randomKey(): K
+    public randomKey(amount: number): K[]
+    public randomKey(amount?: number): K | K[] | undefined {
+        const array = this.keyArray()
+        if (array.length === 0)
+            return typeof amount !== 'undefined' ? [] : undefined
+        if (typeof amount === 'undefined') return randomOfArray(array)
+        if (amount < 0) return []
+        if (amount === 1) return randomOfArray(array)
+        return Array.from({ length: amount }, () => randomOfArray(array))
+    }
+}
+
+function randomOfArray<T>(array: T[]): T {
+    return array[Math.floor(Math.random() * array.length)]
 }
