@@ -142,6 +142,14 @@ export class Supermap<K, V> extends Map<K, V> {
         }
         return [part1, part2]
     }
+
+    public map<T>(fn: (value: V, key: K, c: this) => T): T[] {
+        const iter = this.entries()
+        return Array.from({ length: this.size }, () => {
+            const [key, value] = iter.next().value
+            return fn(value, key, this)
+        })
+    }
 }
 
 function randomOfArray<T>(array: T[]): T {
