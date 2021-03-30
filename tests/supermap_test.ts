@@ -144,5 +144,5 @@ Deno.test('supermap: map items', () => {
     map.set('b', 2)
     map.set('c', 3)
     const mapped = map.map(x => x + 1)
-    equal(mapped, [2, 3, 4])
+    equal(mapped.array(), [2, 3, 4])
 })
