@@ -1,9 +1,9 @@
-export interface SupermapConstructor {
+export interface SupersetConstructor {
     new (): Superset<unknown>
     new <V>(entries?: ReadonlyArray<V> | null): Superset<V>
     new <V>(iterable: Iterable<V>): Superset<V>
     readonly prototype: Superset<unknown>
-    readonly [Symbol.species]: SupermapConstructor
+    readonly [Symbol.species]: SupersetConstructor
 }
 
 /**
