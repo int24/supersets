@@ -172,6 +172,10 @@ export class Supermap<K, V> extends Map<K, V> {
         super.forEach(fn as (value: V, key: K, map: Map<K, V>) => void)
         return this
     }
+
+    public forEach(fn: (value: V, key: K, c: this) => void): this {
+        return this.each(fn)
+    }
 }
 
 function randomOfArray<T>(array: T[]): T {
