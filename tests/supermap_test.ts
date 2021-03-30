@@ -241,6 +241,18 @@ Deno.test('supermap: compare with equals', () => {
     assertEquals(map1.equals(map3), false)
 })
 
+Deno.test('supermap: intersections', () => {
+    const map1: TestSupermap = new Supermap()
+    const map2: TestSupermap = new Supermap()
+    map1.set('a', 1)
+    map1.set('b', 2)
+    map1.set('c', 3)
+    map2.set('a', 1)
+    const intersections = map1.intersect(map2)
+    assertStrictEquals(intersections.size, 1)
+    equal(intersections.array(), [1])
+})
+
 Deno.test('supermap: tap', () => {
     const map: TestSupermap = new Supermap()
     map.set('a', 1)
