@@ -15,7 +15,7 @@ npm install --save supersets
 For use in the browser without a bundler, include this script tag in your HTML.
 
 ```HTML
-<script src="https://unpkg.com/supersets@0.0.4/dist/supersets.js"></script>
+<script src="https://unpkg.com/supersets@0.1.0/dist/supersets.js"></script>
 ```
 
 ## Usage
@@ -29,7 +29,7 @@ const { Supermap } = require('supersets')
 import { Supermap } from 'supersets'
 
 // deno
-import { Supermap } from 'https://deno.land/x/supersets@0.0.4/mod.ts'
+import { Supermap } from 'https://deno.land/x/supersets@0.1.0/mod.ts'
 
 // in the browser
 const { Supermap } = window.Supersets
