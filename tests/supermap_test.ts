@@ -100,3 +100,16 @@ Deno.test('supermap: find an item by key/value', () => {
     assertStrictEquals(findUnknownVal, undefined)
     assertStrictEquals(findUnknownKey, undefined)
 })
+
+Deno.test('supermap: sweep items', () => {
+    const map = new Supermap()
+    map.set('a', 1)
+    map.set('b', 2)
+    map.set('c', 3)
+    const sweep1 = map.sweep(x => x === 2)
+    assertStrictEquals(sweep1, 1)
+    equal(map.array(), [1, 3])
+    const sweep2 = map.sweep(x => x === 4)
+    assertStrictEquals(sweep2, 0)
+    equal(map.array(), [1, 3])
+})

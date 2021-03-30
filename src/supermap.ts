@@ -119,6 +119,12 @@ export class Supermap<K, V> extends Map<K, V> {
         for (const [key, val] of this) if (fn(val, key, this)) return key
         return undefined
     }
+
+    public sweep(fn: (value: V, key: K, c: this) => boolean): number {
+        const sizeBefore = this.size
+        for (const [key, val] of this) if (fn(val, key, this)) this.delete(key)
+        return sizeBefore - this.size
+    }
 }
 
 function randomOfArray<T>(array: T[]): T {
