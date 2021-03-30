@@ -56,7 +56,7 @@ Deno.test('superset: get random values', () => {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     for (let i = 0; i < numbers.length; i++) set.add(numbers[i])
     assertArrayIncludes(numbers, [set.random()])
-    assertArrayIncludes(numbers, [set.random(1)])
+    assertArrayIncludes(numbers, set.random(1))
     assertArrayIncludes(numbers, set.random(5))
     set.clear()
     assertStrictEquals(set.random(), undefined)
