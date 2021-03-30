@@ -79,9 +79,11 @@ Deno.test('supermap: get random keys/values', () => {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     for (let i = 0; i < chars.length; i++) map.set(chars[i], numbers[i])
     assertArrayIncludes(numbers, [map.random()])
+    assertArrayIncludes(numbers, [map.random(1)])
     assertArrayIncludes(numbers, map.random(5))
-    assertArrayIncludes(chars, map.randomKey(5))
     assertArrayIncludes(chars, [map.randomKey()])
+    assertArrayIncludes(chars, [map.randomKey(1)])
+    assertArrayIncludes(chars, map.randomKey(5))
     map.clear()
     assertStrictEquals(map.random(), undefined)
     assertStrictEquals(map.randomKey(), undefined)
