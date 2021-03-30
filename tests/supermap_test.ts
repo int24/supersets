@@ -168,3 +168,12 @@ Deno.test('supermap: test items with every', () => {
     assertStrictEquals(match, true)
     assertStrictEquals(matchUnknown, false)
 })
+
+Deno.test('supermap: reduce items', () => {
+    const map: TestSupermap = new Supermap()
+    map.set('a', 1)
+    map.set('b', 2)
+    map.set('c', 3)
+    const total = map.reduce((t, v) => t + v, 0)
+    assertStrictEquals(total, 1 + 2 + 3)
+})

@@ -158,6 +158,15 @@ export class Supermap<K, V> extends Map<K, V> {
         for (const [key, val] of this) if (!fn(val, key, this)) return false
         return true
     }
+
+    public reduce<T>(
+        fn: (accumulator: T, value: V, key: K, c: this) => T,
+        initial: T
+    ): T {
+        let result = initial
+        for (const [key, val] of this) result = fn(result, val, key, this)
+        return result
+    }
 }
 
 function randomOfArray<T>(array: T[]): T {
