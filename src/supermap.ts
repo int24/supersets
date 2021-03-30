@@ -153,7 +153,6 @@ export class Supermap<K, V> extends Map<K, V> {
             return typeof amount !== 'undefined' ? [] : undefined
         if (typeof amount === 'undefined') return randomOfArray(array)
         if (amount < 0) return []
-        if (amount === 1) return randomOfArray(array)
         return Array.from({ length: amount }, () => randomOfArray(array))
     }
 
@@ -169,7 +168,6 @@ export class Supermap<K, V> extends Map<K, V> {
             return typeof amount !== 'undefined' ? [] : undefined
         if (typeof amount === 'undefined') return randomOfArray(array)
         if (amount < 0) return []
-        if (amount === 1) return randomOfArray(array)
         return Array.from({ length: amount }, () => randomOfArray(array))
     }
 
