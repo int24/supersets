@@ -49,4 +49,40 @@ export class Supermap<K, V> extends Map<K, V> {
             this._keyArray = [...this.keys()]
         return this._keyArray
     }
+
+    public first(): V | undefined
+    public first(amount: number): V[]
+    public first(amount: number = 1): V | V[] | undefined {
+        const iter = this.values()
+        if (amount < 0) return this.last(-amount)
+        if (amount === 1) return iter.next().value
+        return Array.from({ length: amount }, () => iter.next().value)
+    }
+
+    public firstKey(): K | undefined
+    public firstKey(amount: number): K[]
+    public firstKey(amount: number = 1): K | K[] | undefined {
+        const iter = this.keys()
+        if (amount < 0) return this.lastKey(-amount)
+        if (amount === 1) return iter.next().value
+        return Array.from({ length: amount }, () => iter.next().value)
+    }
+
+    public last(): V | undefined
+    public last(amount: number): V[]
+    public last(amount: number = 1): V | V[] | undefined {
+        const array = this.array()
+        if (amount < 0) return this.first(-amount)
+        if (amount === 1) return array[array.length - 1]
+        return array.slice(-amount)
+    }
+
+    public lastKey(): K | undefined
+    public lastKey(amount: number): K[]
+    public lastKey(amount: number = 1): K | K[] | undefined {
+        const array = this.keyArray()
+        if (amount < 0) return this.firstKey(-amount)
+        if (amount === 1) return array[array.length - 1]
+        return array.slice(-amount)
+    }
 }
