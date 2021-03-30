@@ -109,6 +109,16 @@ export class Supermap<K, V> extends Map<K, V> {
         if (amount === 1) return randomOfArray(array)
         return Array.from({ length: amount }, () => randomOfArray(array))
     }
+
+    public find(fn: (value: V, key: K, c: this) => boolean): V | undefined {
+        for (const [key, val] of this) if (fn(val, key, this)) return val
+        return undefined
+    }
+
+    public findKey(fn: (value: V, key: K, c: this) => boolean): K | undefined {
+        for (const [key, val] of this) if (fn(val, key, this)) return key
+        return undefined
+    }
 }
 
 function randomOfArray<T>(array: T[]): T {

@@ -86,3 +86,17 @@ Deno.test('supermap: get random keys/values', () => {
     equal(map.random(5), [])
     equal(map.randomKey(5), [])
 })
+
+Deno.test('supermap: find an item by key/value', () => {
+    const map = new Supermap()
+    map.set('a', 1)
+    map.set('b', 2)
+    const findVal = map.find(v => v === 1)
+    const findKey = map.findKey(v => v === 1)
+    const findUnknownVal = map.find(v => v === 3)
+    const findUnknownKey = map.findKey(v => v === 3)
+    assertStrictEquals(findVal, 1)
+    assertStrictEquals(findKey, 'a')
+    assertStrictEquals(findUnknownVal, undefined)
+    assertStrictEquals(findUnknownKey, undefined)
+})
