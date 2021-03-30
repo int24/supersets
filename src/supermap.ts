@@ -195,6 +195,10 @@ export class Supermap<K, V> extends Map<K, V> {
         for (const [k, v] of sorted) this.set(k, v)
         return this
     }
+
+    public intersect(other: Supermap<K, V>): Supermap<K, V> {
+        return other.filter((_, k) => this.has(k))
+    }
 }
 
 function randomOfArray<T>(array: T[]): T {
