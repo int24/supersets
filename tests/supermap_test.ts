@@ -7,8 +7,10 @@ import {
 
 import { Supermap } from '../mod.ts'
 
+type TestSupermap = Supermap<string, number>
+
 Deno.test('supermap: basic map operations', () => {
-    const map = new Supermap()
+    const map: TestSupermap = new Supermap()
     map.set('a', 1)
     map.set('b', 1)
     assertEquals(map.size, 2)
@@ -23,7 +25,7 @@ Deno.test('supermap: basic map operations', () => {
 })
 
 Deno.test('supermap: convert to array/keyArray', () => {
-    const map = new Supermap()
+    const map: TestSupermap = new Supermap()
     map.set('a', 1)
     map.set('b', 2)
     const array1 = map.array()
@@ -42,7 +44,7 @@ Deno.test('supermap: convert to array/keyArray', () => {
 })
 
 Deno.test('supermap: get first/last keys', () => {
-    const map = new Supermap()
+    const map: TestSupermap = new Supermap()
     map.set('a', 1)
     map.set('b', 2)
     map.set('c', 3)
@@ -57,7 +59,7 @@ Deno.test('supermap: get first/last keys', () => {
 })
 
 Deno.test('supermap: get first/last values', () => {
-    const map = new Supermap()
+    const map: TestSupermap = new Supermap()
     map.set('a', 1)
     map.set('b', 2)
     map.set('c', 3)
@@ -72,7 +74,7 @@ Deno.test('supermap: get first/last values', () => {
 })
 
 Deno.test('supermap: get random keys/values', () => {
-    const map = new Supermap()
+    const map: TestSupermap = new Supermap()
     const chars = 'abcdefghij'
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     for (let i = 0; i < chars.length; i++) map.set(chars[i], numbers[i])
@@ -88,7 +90,7 @@ Deno.test('supermap: get random keys/values', () => {
 })
 
 Deno.test('supermap: find an item by key/value', () => {
-    const map = new Supermap()
+    const map: TestSupermap = new Supermap()
     map.set('a', 1)
     map.set('b', 2)
     const findVal = map.find(v => v === 1)
@@ -102,7 +104,7 @@ Deno.test('supermap: find an item by key/value', () => {
 })
 
 Deno.test('supermap: sweep items', () => {
-    const map = new Supermap()
+    const map: TestSupermap = new Supermap()
     map.set('a', 1)
     map.set('b', 2)
     map.set('c', 3)
@@ -112,4 +114,14 @@ Deno.test('supermap: sweep items', () => {
     const sweep2 = map.sweep(x => x === 4)
     assertStrictEquals(sweep2, 0)
     equal(map.array(), [1, 3])
+})
+
+Deno.test('supermap: filter items', () => {
+    const map: TestSupermap = new Supermap()
+    map.set('a', 1)
+    map.set('b', 2)
+    map.set('c', 3)
+    const filtered = map.filter(x => x > 1)
+    assertStrictEquals(filtered.size, 2)
+    equal(filtered, [2, 3])
 })

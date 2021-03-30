@@ -125,6 +125,13 @@ export class Supermap<K, V> extends Map<K, V> {
         for (const [key, val] of this) if (fn(val, key, this)) this.delete(key)
         return sizeBefore - this.size
     }
+
+    public filter(fn: (value: V, key: K, c: this) => boolean): this {
+        const results = new Supermap<K, V>() as this
+        for (const [key, val] of this)
+            if (fn(val, key, this)) results.set(key, val)
+        return results
+    }
 }
 
 function randomOfArray<T>(array: T[]): T {
