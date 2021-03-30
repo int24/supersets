@@ -208,7 +208,7 @@ Deno.test('supermap: clone', () => {
     equal(map, clonedMap)
 })
 
-Deno.test('supermap: concat', () => {
+Deno.test('supermap: combine with concat', () => {
     const map1: TestSupermap = new Supermap()
     const map2: TestSupermap = new Supermap()
     const map3: TestSupermap = new Supermap()
