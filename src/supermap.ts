@@ -205,6 +205,13 @@ export class Supermap<K, V> extends Map<K, V> {
     public clone(): this {
         return new this.constructor[Symbol.species](this) as this
     }
+
+    public concat(...maps: Supermap<K, V>[]): this {
+        const newMap = this.clone()
+        for (const map of maps)
+            for (const [key, val] of map) newMap.set(key, val)
+        return newMap
+    }
 }
 
 function randomOfArray<T>(array: T[]): T {

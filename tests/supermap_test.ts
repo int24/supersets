@@ -207,3 +207,15 @@ Deno.test('supermap: clone', () => {
     const clonedMap = map.clone()
     equal(map, clonedMap)
 })
+
+Deno.test('supermap: concat', () => {
+    const map1: TestSupermap = new Supermap()
+    const map2: TestSupermap = new Supermap()
+    const map3: TestSupermap = new Supermap()
+    map1.set('a', 1)
+    map2.set('b', 2)
+    map3.set('c', 3)
+    const combined = map1.concat(map2, map3)
+    assertStrictEquals(combined.size, 3)
+    equal(combined.array(), [1, 2, 3])
+})
