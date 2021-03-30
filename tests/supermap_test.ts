@@ -125,3 +125,15 @@ Deno.test('supermap: filter items', () => {
     assertStrictEquals(filtered.size, 2)
     equal(filtered, [2, 3])
 })
+
+Deno.test('supermap: partition items', () => {
+    const map: TestSupermap = new Supermap()
+    map.set('a', 1)
+    map.set('b', 2)
+    map.set('c', 3)
+    const [part1, part2] = map.partition(x => x > 1)
+    assertStrictEquals(part1.size, 2)
+    assertStrictEquals(part2.size, 1)
+    equal(part1, [2, 3])
+    equal(part2, [1])
+})

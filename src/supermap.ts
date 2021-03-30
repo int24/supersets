@@ -132,6 +132,16 @@ export class Supermap<K, V> extends Map<K, V> {
             if (fn(val, key, this)) results.set(key, val)
         return results
     }
+
+    public partition(fn: (value: V, key: K, c: this) => boolean): [this, this] {
+        const part1 = new Supermap<K, V>() as this
+        const part2 = new Supermap<K, V>() as this
+        for (const [key, val] of this) {
+            if (fn(val, key, this)) part1.set(key, val)
+            else part2.set(key, val)
+        }
+        return [part1, part2]
+    }
 }
 
 function randomOfArray<T>(array: T[]): T {
