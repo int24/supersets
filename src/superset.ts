@@ -106,7 +106,6 @@ export class Superset<V> extends Set<V> {
             return typeof amount !== 'undefined' ? [] : undefined
         if (typeof amount === 'undefined') return randomOfArray(array)
         if (amount < 0) return []
-        if (amount === 1) return randomOfArray(array)
         return Array.from({ length: amount }, () => randomOfArray(array))
     }
 
