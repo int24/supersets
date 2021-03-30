@@ -146,3 +146,14 @@ Deno.test('supermap: map items', () => {
     const mapped = map.map(x => x + 1)
     equal(mapped.array(), [2, 3, 4])
 })
+
+Deno.test('supermap: test items with some', () => {
+    const map: TestSupermap = new Supermap()
+    map.set('a', 1)
+    map.set('b', 2)
+    map.set('c', 3)
+    const match = map.some(x => x === 1)
+    const matchUnknown = map.some(x => x === 4)
+    assertStrictEquals(match, true)
+    assertStrictEquals(matchUnknown, false)
+})

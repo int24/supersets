@@ -148,6 +148,11 @@ export class Supermap<K, V> extends Map<K, V> {
         for (const [key, val] of this) map.set(key, fn(val, key, this))
         return map
     }
+
+    public some(fn: (value: V, key: K, c: this) => boolean): boolean {
+        for (const [key, val] of this) if (fn(val, key, this)) return true
+        return false
+    }
 }
 
 function randomOfArray<T>(array: T[]): T {
