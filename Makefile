@@ -15,3 +15,6 @@ dev:
 
 build:
 	npx tsc -p tsconfig.json
+
+bundle:
+	npx webpack
