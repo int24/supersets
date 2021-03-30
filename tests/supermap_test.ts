@@ -177,3 +177,13 @@ Deno.test('supermap: reduce items', () => {
     const total = map.reduce((t, v) => t + v, 0)
     assertStrictEquals(total, 1 + 2 + 3)
 })
+
+Deno.test('supermap: loop with each', () => {
+    const map: TestSupermap = new Supermap()
+    map.set('a', 1)
+    map.set('b', 2)
+    map.set('c', 3)
+    let total = 0
+    map.each(x => (total += x))
+    assertStrictEquals(total, 1 + 2 + 3)
+})
