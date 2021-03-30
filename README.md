@@ -37,3 +37,7 @@ const { Supermap } = window.Supersets
 /* TODO */
 
 ```
+
+## [Documentation](https://doc.deno.land/https/deno.land/x/supersets/mod.ts)
+
+This library has first-class Deno support, documentation will always be available at [doc.deno.land](https://doc.deno.land/https/deno.land/x/supersets/mod.ts).
