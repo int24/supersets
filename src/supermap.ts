@@ -10,6 +10,8 @@ export class Supermap<K, V> extends Map<K, V> {
     private _array: V[] | null = null
     private _keyArray: K[] | null = null
 
+    public ['constructor']: typeof Supermap
+
     constructor(entries?: ReadonlyArray<readonly [K, V]> | null) {
         super(entries)
     }
@@ -198,6 +200,10 @@ export class Supermap<K, V> extends Map<K, V> {
 
     public intersect(other: Supermap<K, V>): Supermap<K, V> {
         return other.filter((_, k) => this.has(k))
+    }
+
+    public clone(): this {
+        return new this.constructor[Symbol.species](this) as this
     }
 }
 

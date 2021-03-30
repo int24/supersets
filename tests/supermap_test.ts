@@ -198,3 +198,12 @@ Deno.test('supermap: sort items', () => {
     equal(sorted, [3, 2, 1])
     equal(map, [3, 2, 1])
 })
+
+Deno.test('supermap: clone', () => {
+    const map: TestSupermap = new Supermap()
+    map.set('a', 1)
+    map.set('b', 2)
+    map.set('c', 3)
+    const clonedMap = map.clone()
+    equal(map, clonedMap)
+})
