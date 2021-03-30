@@ -1,1 +1,1 @@
-export * from './Supermap.ts'
+export * from './supermap.ts'
