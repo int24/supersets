@@ -153,6 +153,11 @@ export class Supermap<K, V> extends Map<K, V> {
         for (const [key, val] of this) if (fn(val, key, this)) return true
         return false
     }
+
+    public every(fn: (value: V, key: K, c: this) => boolean): boolean {
+        for (const [key, val] of this) if (!fn(val, key, this)) return false
+        return true
+    }
 }
 
 function randomOfArray<T>(array: T[]): T {

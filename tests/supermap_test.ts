@@ -157,3 +157,14 @@ Deno.test('supermap: test items with some', () => {
     assertStrictEquals(match, true)
     assertStrictEquals(matchUnknown, false)
 })
+
+Deno.test('supermap: test items with every', () => {
+    const map: TestSupermap = new Supermap()
+    map.set('a', 1)
+    map.set('b', 2)
+    map.set('c', 3)
+    const match = map.every(x => x > 0)
+    const matchUnknown = map.every(x => x === 1)
+    assertStrictEquals(match, true)
+    assertStrictEquals(matchUnknown, false)
+})
