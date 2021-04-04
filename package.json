@@ -1,9 +1,9 @@
 {
   "name": "supersets",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Useful abstractions over JavaScript's native collections (Map and Set).",
-  "main": "dist/index-node.js",
-  "types": "dist/index-node.d.ts",
+  "main": "lib/index-node.js",
+  "types": "lib/index-node.d.ts",
   "directories": {
     "test": "tests"
   },
